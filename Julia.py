@@ -3,7 +3,7 @@ import math
 from utils import complex, cabs
 from numpy import arctan2, cos, sin
 
-def julia(n, c, width = 800, height = 600):
+def julia(n, rec,imc , width = 800, height = 600):
     # Create new black image
     image = Image.new('RGB', (width, height), "black")
 
@@ -15,10 +15,10 @@ def julia(n, c, width = 800, height = 600):
         im_z = 1.0 * (im_z - height/2)/height
 
         # While not diverging
-        while re_z**2 + im_z**2 < 4 and iteration < max_iteration:
+        while re_z * re_z + im_z * im_z < 4 and iteration < max_iteration:
 
-            xtmp = (re_z**2 + im_z**2) ** (n/2) * cos(n * arctan2(im_z,re_z)) + c.re()
-            im_z = (re_z**2 + im_z**2) ** (n/2) * sin(n * arctan2(im_z,re_z)) + c.im()
+            xtmp = (re_z * re_z + im_z * im_z) ** (n/2) * cos(n * arctan2(im_z,re_z)) + rec
+            im_z = (re_z * re_z + im_z * im_z) ** (n/2) * sin(n * arctan2(im_z,re_z)) + imc
             re_z = xtmp
 
             iteration += 1
@@ -39,6 +39,9 @@ def julia(n, c, width = 800, height = 600):
     image.show()
 
 if __name__ == "__main__":
-    julia(2, complex(0.285,0.01))
+    # julia(2, 0.285, 0.01)
+    # julia(3, -1, 0)
+    # julia(4,0.6,0.55)
+    julia(2,0.279,0)
 
 

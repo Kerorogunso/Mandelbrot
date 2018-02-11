@@ -3,6 +3,23 @@ import math
 from utils import complex, cabs
 from numpy import arctan2, cos, sin
 
+colours = [(66, 30, 15),
+    (25, 7, 26),
+    (9, 1, 47),
+    (4, 4, 73),
+    (0, 7, 100),
+    (12, 44, 138),
+    (24, 82, 177),
+    (57, 125, 209),
+    (134, 181, 229),
+    (211, 236, 248),
+    (241, 233, 191),
+    (248, 201, 95),
+    (255, 170, 0),
+    (204, 128, 0),
+    (153, 87, 0),
+    (106, 52, 3)]
+
 def julia(n, rec,imc , width = 800, height = 600):
     # Create new black image
     image = Image.new('RGB', (width, height), "black")
@@ -31,17 +48,18 @@ def julia(n, rec,imc , width = 800, height = 600):
     pixels = image.load()
     for i in range(width):
         for j in range(height):
-            colour = convergence(i * 1.0, j * 1.0)
-            pixels[i,j] = (colour << 21) + (colour << 10) + colour * 8
+            c = convergence(i * 1.0, j * 1.0)
+            # pixels[i,j] = (colour << 21) + (colour << 10) + colour * 8
+            pixels[i,j] = colours[c%16]
         if i%100 == 0:
             print(i)
 
     image.show()
 
 if __name__ == "__main__":
-    # julia(2, 0.285, 0.01)
+    julia(2, 0.285, 0.01)
     # julia(3, -1, 0)
     # julia(4,0.6,0.55)
-    julia(2,0.279,0)
+    # julia(2,0.279,0)
 
 

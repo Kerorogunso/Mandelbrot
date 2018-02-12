@@ -2,6 +2,7 @@ from PIL import Image
 import math
 from utils import complex, cabs
 from numpy import arctan2, cos, sin
+import time
 
 colours = [(66, 30, 15),
     (25, 7, 26),
@@ -20,7 +21,7 @@ colours = [(66, 30, 15),
     (153, 87, 0),
     (106, 52, 3)]
 
-def julia(n, rec,imc , width = 800, height = 600):
+def julia(n, rec,imc , width = 1600, height = 1200):
     # Create new black image
     image = Image.new('RGB', (width, height), "black")
 
@@ -54,6 +55,9 @@ def julia(n, rec,imc , width = 800, height = 600):
         if i%100 == 0:
             print(i)
 
+    timestr = time.strftime("%Y%m%d")
+
+    image.save('julia_%s_%s_%s_%s.png' % (str(n), str(rec), str(imc), timestr),"PNG")
     image.show()
 
 if __name__ == "__main__":
